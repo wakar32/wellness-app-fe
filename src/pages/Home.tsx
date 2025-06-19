@@ -31,13 +31,37 @@ const Home = () => {
 
   return (
     <div>
-      <button onClick={logout}>Logout</button>
-      <ThemeToggle />
-      <input
-        placeholder="Search notes..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <nav className="navbar navbar-dark bg-primary">
+        <a className="navbar-brand">Wellness App</a>
+
+        <form className="form-inline">
+          <ThemeToggle />
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search notes..."
+            aria-label="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          ></input>
+
+          <div
+            onClick={logout}
+            className="btn btn-danger"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Logout"
+          >
+            <img
+              src="/icons/logout-2-svgrepo-com.svg"
+              alt="Dark mode"
+              width="24"
+              height="24"
+            />
+          </div>
+        </form>
+      </nav>
+
       <WellnessForm onSubmit={handleAddLog} />
       <WellnessTable logs={filtered} />
     </div>

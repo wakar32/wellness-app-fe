@@ -57,6 +57,7 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
 
       <label>
         Activity Notes:
+        {/* {notes.length}/200 */}
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}

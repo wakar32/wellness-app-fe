@@ -34,36 +34,76 @@ const AuthForm: React.FC<Props> = ({ onSubmit, isSignup = false }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="Email"
-      />
-      <div>{errors.email}</div>
-      <input
-        type="password"
-        name="password"
-        value={form.password}
-        onChange={handleChange}
-        placeholder="Password"
-      />
-      <div>{errors.password}</div>
-      {isSignup && (
-        <>
+    <section
+      className="vh-100 d-flex justify-content-center align-items-center"
+      style={{ backgroundColor: "#508bfc", height: "100vh" }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="card d-flex justify-content-center"
+        style={{ width: "30rem", height: "30rem", padding: "0 2rem" }}
+      >
+        <h2 className="fw-bold mb-5">
+          {" "}
+          {isSignup ? "Sign up now" : "Sign In"}{" "}
+        </h2>
+        <div className="form-group">
+          <label htmlFor="InputEmail">Email address</label>
+          <input
+            className="form-control"
+            id="InputEmail"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+          <div className="invalid-feedback d-block">{errors.email}</div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="InputPassword">Password</label>
           <input
             type="password"
-            name="confirmPassword"
-            value={form.confirmPassword}
+            className="form-control"
+            id="InputPassword"
+            name="password"
+            value={form.password}
             onChange={handleChange}
-            placeholder="Confirm Password"
+            placeholder="Password"
           />
-          <div>{errors.confirmPassword}</div>
-        </>
-      )}
-      <button type="submit">{isSignup ? "Sign Up" : "Login"}</button>
-    </form>
+          <div className="invalid-feedback d-block">{errors.password}</div>
+        </div>
+        {isSignup && (
+          <div className="form-group">
+            <label htmlFor="ConfirmInputPassword">Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="ConfirmInputPassword"
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              placeholder="Password"
+            />
+            <div className="invalid-feedback d-block">
+              {errors.confirmPassword}
+            </div>
+          </div>
+        )}
+        <button type="submit" className="btn btn-primary">
+          {isSignup ? "Sign Up" : "Login"}
+        </button>
+        {!isSignup ? (
+          <p className="text-center">
+            Not a member? <a href="/signup">Register</a>
+          </p>
+        ) : (
+          <p className="text-center">
+            Already have an account? <a href="/login">Login</a>
+          </p>
+        )}
+      </form>
+    </section>
   );
 };
 
