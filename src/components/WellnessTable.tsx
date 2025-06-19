@@ -6,27 +6,30 @@ type Props = {
 };
 
 const WellnessTable: React.FC<Props> = ({ logs }) => {
+  console.log(logs);
   if (!logs.length) return <p>No logs available</p>;
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Mood</th>
-          <th>Sleep</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {logs.map((log) => (
-          <tr key={log.id}>
-            <td>{log.mood}</td>
-            <td>{log.sleep} hrs</td>
-            <td>{log.notes}</td>
+    <div className="table-responsive mt-4">
+      <table className="table table-striped table-bordered">
+        <thead className="thead-dark">
+          <tr>
+            <th>Mood</th>
+            <th>Sleep</th>
+            <th>Notes</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {logs.map((log) => (
+            <tr key={log.id}>
+              <td>{log.mood}</td>
+              <td>{log.sleep} hrs</td>
+              <td>{log.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

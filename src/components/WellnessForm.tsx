@@ -16,7 +16,7 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (notes.length > 200) {
-      setError("Notes must be less than 200 characters");
+      setError("Notes must be less than or equel 200 characters");
       return;
     }
     const log: WellnessLog = {
@@ -25,6 +25,7 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
       sleep,
       notes,
     };
+    console.log(log);
     onSubmit(log);
     setMood("Happy");
     setSleep(8);
@@ -33,39 +34,68 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Mood:
-        <select value={mood} onChange={(e) => setMood(e.target.value as any)}>
-          <option value="Happy">Happy</option>
-          <option value="Stressed">Stressed</option>
-          <option value="Tired">Tired</option>
-          <option value="Focused">Focused</option>
+    <form onSubmit={handleSubmit} className="p-4 border rounded bg-light mt-4">
+      {/* Mood */}
+      <div className="form-group">
+        <label htmlFor="moodSelect">Mood</label>
+        <select
+          id="moodSelect"
+          className="form-control"
+          value={mood}
+          onChange={(e) => setMood(e.target.value as any)}
+        >
+          <option value="Happy">😊 Happy</option>
+          <option value="Stressed">😫 Stressed</option>
+          <option value="Tired">😴 Tired</option>
+          <option value="Focused">🎯 Focused</option>
         </select>
-      </label>
+      </div>
 
-      <label>
-        Sleep (hours): {sleep}
+      {/* Sleep */}
+      <div className="form-group">
+        <label htmlFor="sleepRange">Sleep (hours): {sleep}</label>
         <input
+          id="sleepRange"
           type="range"
+          className="form-control-range"
           min="0"
           max="12"
           value={sleep}
           onChange={(e) => setSleep(Number(e.target.value))}
         />
-      </label>
+      </div>
 
-      <label>
-        Activity Notes:
-        {/* {notes.length}/200 */}
+      {/* Notes */}
+      <div className="form-group">
+        <label htmlFor="notesArea">Activity Notes</label>
         <textarea
+          id="notesArea"
+          className="form-control"
+          rows={3}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           maxLength={200}
         />
-      </label>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      <button type="submit">Add Log</button>
+        {/* Optional character counter: */}
+        {/* <small className="form-text text-muted">{notes.length}/200 characters</small> */}
+      </div>
+
+      {/* Error Message */}
+      {error && <div className="alert alert-danger">{error}</div>}
+
+      {/* Submit Button */}
+      <div className="d-flex justify-content-between">
+        <button type="submit" className="btn btn-primary">
+          Add Log
+        </button>
+        <p
+          className={`mt-1 mb-0 ${
+            notes.length >= 200 ? "text-danger" : "text-muted"
+          }`}
+        >
+          {notes.length}/200 characters
+        </p>
+      </div>
     </form>
   );
 };

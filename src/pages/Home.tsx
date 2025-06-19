@@ -6,12 +6,14 @@ import { WellnessLog } from "../types";
 import WellnessForm from "../components/WellnessForm";
 import WellnessTable from "../components/WellnessTable";
 import ThemeToggle from "../components/ThemeToggle";
+import LogoutModal from "../components/LogoutModal";
 
 const Home = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
   const [logs, setLogs] = useState<WellnessLog[]>([]);
   const [search, setSearch] = useState("");
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
     if (!token) navigate("/login");
@@ -43,10 +45,10 @@ const Home = () => {
             aria-label="Search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-          ></input>
+          />
 
           <div
-            onClick={logout}
+            onClick={() => setShowModal(true)}
             className="btn btn-danger"
             data-toggle="tooltip"
             data-placement="bottom"
@@ -54,7 +56,7 @@ const Home = () => {
           >
             <img
               src="/icons/logout-2-svgrepo-com.svg"
-              alt="Dark mode"
+              alt="Logout"
               width="24"
               height="24"
             />
@@ -64,6 +66,13 @@ const Home = () => {
 
       <WellnessForm onSubmit={handleAddLog} />
       <WellnessTable logs={filtered} />
+
+      {/* Logout Confirmation Modal */}
+      <LogoutModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={logout}
+      />
     </div>
   );
 };
