@@ -34,7 +34,7 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded bg-light mt-4">
+    <form onSubmit={handleSubmit} className="p-4 border rounded mt-4">
       {/* Mood */}
       <div className="form-group">
         <label htmlFor="moodSelect">Mood</label>

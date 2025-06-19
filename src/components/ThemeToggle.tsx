@@ -13,6 +13,7 @@ const ThemeToggle = () => {
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
       style={{
         background: "none",

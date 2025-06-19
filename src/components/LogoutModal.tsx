@@ -19,7 +19,13 @@ const LogoutModal: React.FC<LogoutModalProps> = ({
       style={{ backgroundColor: show ? "rgba(0,0,0,0.5)" : "transparent" }}
     >
       <div className="modal-dialog modal-dialog-centered" role="document">
-        <div className="modal-content">
+        <div
+          className="modal-content"
+          style={{
+            backgroundColor: "var(--modal-bg)",
+            color: "var(--modal-text)",
+          }}
+        >
           <div className="modal-header">
             <h5 className="modal-title">Confirm Logout</h5>
             <button type="button" className="close" onClick={onClose}>
