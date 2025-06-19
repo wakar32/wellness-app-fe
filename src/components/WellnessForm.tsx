@@ -25,7 +25,6 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
       sleep,
       notes,
     };
-    console.log(log);
     onSubmit(log);
     setMood("Happy");
     setSleep(8);
@@ -35,7 +34,6 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4 border rounded mt-4">
-      {/* Mood */}
       <div className="form-group">
         <label htmlFor="moodSelect">Mood</label>
         <select
@@ -51,7 +49,6 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
         </select>
       </div>
 
-      {/* Sleep */}
       <div className="form-group">
         <label htmlFor="sleepRange">Sleep (hours): {sleep}</label>
         <input
@@ -65,7 +62,6 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
         />
       </div>
 
-      {/* Notes */}
       <div className="form-group">
         <label htmlFor="notesArea">Activity Notes</label>
         <textarea
@@ -76,14 +72,10 @@ const WellnessForm: React.FC<Props> = ({ onSubmit }) => {
           onChange={(e) => setNotes(e.target.value)}
           maxLength={200}
         />
-        {/* Optional character counter: */}
-        {/* <small className="form-text text-muted">{notes.length}/200 characters</small> */}
       </div>
 
-      {/* Error Message */}
       {error && <div className="alert alert-danger">{error}</div>}
 
-      {/* Submit Button */}
       <div className="d-flex justify-content-between">
         <button type="submit" className="btn btn-primary">
           Add Log

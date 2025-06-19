@@ -36,7 +36,7 @@ const AuthForm: React.FC<Props> = ({ onSubmit, isSignup = false }) => {
   return (
     <section
       className="vh-100 d-flex justify-content-center align-items-center"
-      style={{ backgroundColor: "#508bfc", height: "100vh" }}
+      style={{ backgroundColor: "#508bfc", minHeight: "100vh", color: "black" }}
     >
       <form
         onSubmit={handleSubmit}

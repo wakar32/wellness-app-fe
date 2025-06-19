@@ -6,7 +6,6 @@ type Props = {
 };
 
 const WellnessTable: React.FC<Props> = ({ logs }) => {
-  console.log(logs);
   if (!logs.length) return <p>No logs available</p>;
 
   return (
@@ -14,6 +13,7 @@ const WellnessTable: React.FC<Props> = ({ logs }) => {
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
           <tr>
+            <th>Id</th>
             <th>Mood</th>
             <th>Sleep</th>
             <th>Notes</th>
@@ -22,6 +22,7 @@ const WellnessTable: React.FC<Props> = ({ logs }) => {
         <tbody>
           {logs.map((log) => (
             <tr key={log.id}>
+              <td>{log.id}</td>
               <td>{log.mood}</td>
               <td>{log.sleep} hrs</td>
               <td>{log.notes}</td>

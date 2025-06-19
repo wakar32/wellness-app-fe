@@ -5,6 +5,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+
+import { Provider } from "react-redux"; // Redux
+import { store } from "./store"; // Redux store
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import "./App.css";
@@ -15,20 +18,24 @@ const Home = lazy(() => import("./pages/Home"));
 
 const App = () => {
   return (
-    <Router>
-      <AuthProvider>
-        <ThemeProvider>
-          <Suspense fallback={<p>Loading...</p>}>
+    <Provider store={store}>
+      <Router>
+        <AuthProvider>
+          <ThemeProvider>
+            {/* <Suspense
+              fallback={<div className="app-loader">Loading app...</div>}
+            > */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-          </Suspense>
-        </ThemeProvider>
-      </AuthProvider>
-    </Router>
+            {/* </Suspense> */}
+          </ThemeProvider>
+        </AuthProvider>
+      </Router>
+    </Provider>
   );
 };
 
